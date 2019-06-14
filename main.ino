@@ -11,7 +11,7 @@
  * 
  */
 
-
+// Input and output ports declaration
 int btn1 = 9;
 int btn2 = 10;
 int led1 = 7;
@@ -21,10 +21,7 @@ int rele = 12;
 
 int cycles = 0;
 
-//const int shortWash = 2;
-//const int mediumWash = 4;
-//const int longWash = 6;
-
+// Wash periods declared in minutes
 const int shortWash = 1;
 const int mediumWash = 2;
 const int longWash = 3;
@@ -37,7 +34,7 @@ unsigned long cycleRefresh = (unsigned long) 100;
 unsigned long endOfWash = 0;
 
 /*
- * Current states:
+ * Available states:
  *  's' = short wash
  *  'm' = medium wash
  *  'l' = long wash
@@ -47,9 +44,10 @@ unsigned long endOfWash = 0;
 
 char state = 'i';
 
+// Interval between debug serial writes
 unsigned long nextSerialWrite = (unsigned long) 0;
+
 void setup() {
-  // put your setup code here, to run once:
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
   pinMode(led3, OUTPUT);
@@ -62,11 +60,7 @@ void setup() {
 
 }
 
-void(* resetFunc) (void) = 0;
-
 void loop() {
-  // put your main code here, to run repeatedly:
-
   // stops the machine
   if(digitalRead(btn2)){
     state = 'i';
@@ -79,7 +73,7 @@ void loop() {
     endOfWash = 0;
   }
 
-  // interprets the button press
+  // interprets the button presses
   if(digitalRead(btn1)){
     counting = true;
 
